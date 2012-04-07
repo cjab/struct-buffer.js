@@ -282,7 +282,7 @@
 
         type   = field[0];
         length = field[1];
-        struct.addField(name, type, length);
+        structBuffer.addField(name, type, length);
       }
     }
 
