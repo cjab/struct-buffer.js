@@ -1,11 +1,11 @@
 <html>
   <head>
-    <script type="text/javascript" src="struct.js"></script>
+    <script type="text/javascript" src="struct-buffer.js"></script>
   </head>
   <body>
     <script type="text/javascript">
       var buffer = new ArrayBuffer(64),
-          data   = new Struct({
+          data   = new StructBuffer({
             id:   'Uint32',
             name: ['Uint8', 12]
           }, buffer);

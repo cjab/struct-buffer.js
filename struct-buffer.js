@@ -11,7 +11,7 @@
     define(factory);
   } else {
     // Browser globals:
-    window.Struct = factory();
+    window.StructBuffer = factory();
   }
 }(function () {
   'use strict';
@@ -29,19 +29,19 @@
 
 
   /**
-   * Creates an instance of Struct
+   * Creates an instance of StructBuffer
    *
    * @constructor
-   * @this {Struct}
+   * @this {StructBuffer}
    * @param {Object} description an object describing the fields in this struct
    * @param {ArrayBuffer} buffer the binary data this struct will be accessing
    */
-  var Struct = function(description, buffer) {
-    var name, struct, type, length, field, dataView, i;
+  var StructBuffer = function(description, buffer) {
+    var name, structBuffer, type, length, field, dataView, i;
 
     dataView = new DataView(buffer);
 
-    struct = {
+    structBuffer = {
       /** @private
        * The size, in bytes, of this struct
        */
@@ -286,8 +286,8 @@
       }
     }
 
-    return struct;
+    return structBuffer;
   };
 
-  return Struct;
+  return StructBuffer;
 }));
