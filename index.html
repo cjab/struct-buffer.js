@@ -3,5 +3,12 @@
     <script type="text/javascript" src="struct.js"></script>
   </head>
   <body>
+    <script type="text/javascript">
+      var buffer = new ArrayBuffer(64),
+          data   = new Struct({
+            id:   'Uint32',
+            name: ['Uint8', 12]
+          }, buffer);
+    </script>
   </body>
 </html>

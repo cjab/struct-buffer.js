@@ -1,22 +1,23 @@
-//(function(){
-
-  // Initial Setup
-  // -------------
-
-  var root = this;
-
-  var previousStruct = root.Struct;
-
-  var Struct;
-  if (typeof exports !== 'undefined') {
-    Struct = exports;
+/*
+ * Copyright 2012, Chad Jablonski
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+(function (factory) {
+  'use strict';
+  if (typeof define === 'function' && define.amd) {
+    // Register as an anonymous AMD module:
+    define(factory);
   } else {
-    Struct = root.Struct = {};
+    // Browser globals:
+    window.Struct = factory();
   }
+}(function () {
+  'use strict';
 
 
-
-  StructField = function(offset, elementSize, length) {
+  var StructField = function(offset, elementSize, length) {
     return {
       offset:      offset,
       length:      length,
@@ -35,7 +36,7 @@
    * @param {Object} description an object describing the fields in this struct
    * @param {ArrayBuffer} buffer the binary data this struct will be accessing
    */
-  Struct = function(description, buffer) {
+  var Struct = function(description, buffer) {
     var name, struct, type, length, field, dataView, i;
 
     dataView = new DataView(buffer);
@@ -240,10 +241,9 @@
        * and struct.seek(1) the second. However, struct.seek(-1) will wrap
        * to the last item in the buffer.
        *
-       * If the seek moves beyond the boundaries of the buffer an exception
-       * is thrown.
-       *
        * @param {Number} index The index of the struct to be moved to.
+       * @exception BeyondBufferBoundsException thrown when seek moves beyond
+       *            the boundaries of the buffer
        */
       seek: function(index) {
         var lastPosition = this._lastPosition();
@@ -288,10 +288,6 @@
 
     return struct;
   };
-//}());
 
-var buffer = new ArrayBuffer(64),
-    data = new Struct({
-      id:   'Uint32',
-      name: ['Uint8', 12]
-    }, buffer);
+  return Struct;
+}));
